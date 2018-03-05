@@ -13,7 +13,7 @@ contract ponziGame {
     
     Investments[] investment;
 
-    function getPaidByFactor() payable {
+    function getPaidByInvestmentOrder() payable {
         
         investment.push(Investments(msg.sender, msg.value));
         
