@@ -2,98 +2,31 @@ pragma solidity ^0.4.20;
 
 contract ponziGame {
 
+
+    struct Investments {
+        address investor;
+        uint amount;
+    }
+    
     address private boss;
-
-    mapping(address => uint) public investors;
-
-    function ponziGame () public {
-        boss = msg.sender;
-    }
-
-    function investByTransfer() public payable {
-        require(msg.value >= 100 wei);
-        investors[msg.sender] += msg.value;
-    }    
-
-    function getPaidByFactor(uint256 amount) public {
-           
-    }
-
-    function getPaidByOrder() public {
-        
-    }
-
-    function rankedOnTotalInvestment() public {        
-        
-    }
-
-    function vipInvestor() public {
-        
-    }
-
-    function investmentFee() public {        
-        
-    }
-
-    function feeOfEveryInvestment() public {
-
-    }
-
-    function feePaidRandomly() public {
-        
-    }
-
+    uint256 top = 0;
     
-    function checkingTransferError() public {
+    Investments[] investment;
 
-    }
-
-    function modifyContractParameter() public {
-
-    }
-
-    function checkingTotalInvestment() public {
-
+    function getPaidByFactor() payable {
+        
+        investment.push(Investments(msg.sender, msg.value));
+        
+        boss.transfer(msg.value * 5 / 100);
+        
+        while(investment[top].amount * 110 / 100  < this.balance){
+            investment[top].investor.transfer(investment[top].amount * 110 / 100);
+            top++;
+        }
     }
     
-    function readCurrentBalance() public returns (uint256) {
-        return this.balance;
-    }
-
-    function readTotalInvestment() public {
-
-    }
-
-    function readPayouts() public {
-
-    }
-    
-    function readNumberOfInvestors() public {
-        
-    }
-
-    function readCurrentVIPInvestors() public {
-
-    }
-
-    function readCurrentPayout() public {
-
-    }
-
-    function readCurrentFee() public {
-
-    }
-
-    function bossTerminateContract() public {
-        
-    }
-
-    function splitBalance() public {
-
-    }    
-
-    function selfDestroying() public {
-        
+     function getEthBalance(address _addr) constant returns(uint) {
+        return _addr.balance;
     }
 
 }
