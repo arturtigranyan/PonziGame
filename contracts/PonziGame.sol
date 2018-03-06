@@ -5,7 +5,7 @@ contract ponziGame {
     struct Investment {
         address investor;
         uint amount;
-        uint payout;
+        uint payoutFactor;
     }
 
     address private boss;
@@ -31,12 +31,12 @@ contract ponziGame {
         
         require(msg.value >= 100);
         
-        investments.push(Investment(msg.sender, msg.value, msg.value * payoutFactor_ / 100 ));
+        investments.push(Investment(msg.sender, msg.value, payoutFactor_));
         
         boss.transfer(msg.value * 5 / 100);
         
-        while(investments[top].amount * payoutFactor_ / 100 < this.balance){
-            investments[top].investor.transfer(investments[top].amount * payoutFactor_ / 100);
+        while(investments[top].amount * investments[top].payoutFactor / 100 < this.balance){
+            investments[top].investor.transfer(investments[top].amount * investments[top].payoutFactor / 100);
             top++;
         }
     }
