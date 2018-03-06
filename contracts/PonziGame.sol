@@ -2,31 +2,33 @@ pragma solidity ^0.4.20;
 
 contract ponziGame {
 
-
-    struct Investments {
+    struct Investment {
         address investor;
         uint amount;
     }
-    
-    address private boss;
-    uint256 top = 0;
-    
-    Investments[] investment;
 
-    function getPaidByInvestmentOrder() payable {
+    address private boss;
+    
+    uint top = 0;
+    
+    Investment[] investments;
+
+    function invest() payable {
         
-        investment.push(Investments(msg.sender, msg.value));
+        require(msg.value > 100);
+            
+        investments.push(Investment(msg.sender, msg.value));
         
         boss.transfer(msg.value * 5 / 100);
         
-        while(investment[top].amount * 110 / 100  < this.balance){
-            investment[top].investor.transfer(investment[top].amount * 110 / 100);
+        while(investments[top].amount * 110 / 100  < this.balance){
+            investments[top].investor.transfer(investments[top].amount * 110 / 100);
             top++;
         }
     }
     
-     function getEthBalance(address _addr) constant returns(uint) {
-        return _addr.balance;
+     function getEthBalance() constant returns(uint) {
+        return this.balance;
     }
 
 }

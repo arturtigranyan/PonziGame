@@ -2,11 +2,14 @@ var balance = 0;
 var Investments = [];
 var theBoss = 0;
 
-function getPaidByFactor(address, amount){
+var payoutFactor = 110;
+
+function invest(address, amount, payout){
 
     var investment = {
         amount: amount,
-        address: address
+        address: address,
+        payout: payout 
     }
     
     Investments.push(investment);    
@@ -14,13 +17,12 @@ function getPaidByFactor(address, amount){
 
     transfer("Boss", amount * 5 / 100)
     
-    while(Investments[0].amount * 110 / 100 < balance){        
-        transfer(Investments[0].address, Investments[0].amount * 110 / 100)     
+    while(Investments[0].amount * Investments[0].payout / 100 < balance){        
+        transfer(Investments[0].address, Investments[0].amount * Investments[0].payout / 100)  
         Investments.shift();   
     }
 
-    console.log("Current balance is " + balance  + " Invesments " + Investments.length)    
-  
+    console.log("Current balance is " + balance  + " Invesments " + Investments.length)
 }
 
 function transfer(address, amount){
@@ -28,9 +30,9 @@ function transfer(address, amount){
     console.log(address + " gets peyout", amount + " wei")
 }
 
-pf = 110;
-getPaidByFactor("abc", 100);
-getPaidByFactor("xyz", 1);
-pf = 130;
-getPaidByFactor("cba", 100);
-getPaidByFactor("abc", 10);
+payoutFactor = 110;
+invest("abc", 100, 110);
+invest("xyz", 1, 110);
+payoutFactor = 130;
+invest("cba", 100, 130);
+invest("abc", 10, 130);
