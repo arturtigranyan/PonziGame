@@ -8,13 +8,9 @@ contract ponziGame {
         uint payoutFactor;
     }
 
-    address private boss;
-    
-    uint top = 0;
-    
-    uint totalInvestment;
-    
-    uint128 payoutFactor_;
+    address private boss;    
+    uint top = 0;    
+    uint8 payoutFactor_;
     
     Investment[] investments;
     
