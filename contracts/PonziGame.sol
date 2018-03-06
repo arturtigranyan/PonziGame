@@ -15,7 +15,7 @@ contract ponziGame {
 
     function invest() payable {
         
-        require(msg.value > 100);
+        require(msg.value => 100);
             
         investments.push(Investment(msg.sender, msg.value));
         
