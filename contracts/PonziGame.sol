@@ -2,98 +2,33 @@ pragma solidity ^0.4.20;
 
 contract ponziGame {
 
+    struct Investment {
+        address investor;
+        uint amount;
+    }
+
     address private boss;
-
-    mapping(address => uint) public investors;
-
-    function ponziGame () public {
-        boss = msg.sender;
-    }
-
-    function investByTransfer() public payable {
-        require(msg.value >= 100 wei);
-        investors[msg.sender] += msg.value;
-    }    
-
-    function getPaidByFactor(uint256 amount) public {
-           
-    }
-
-    function getPaidByOrder() public {
-        
-    }
-
-    function rankedOnTotalInvestment() public {        
-        
-    }
-
-    function vipInvestor() public {
-        
-    }
-
-    function investmentFee() public {        
-        
-    }
-
-    function feeOfEveryInvestment() public {
-
-    }
-
-    function feePaidRandomly() public {
-        
-    }
-
     
-    function checkingTransferError() public {
+    uint top = 0;
+    
+    Investment[] investments;
 
-    }
-
-    function modifyContractParameter() public {
-
-    }
-
-    function checkingTotalInvestment() public {
-
+    function invest() payable {
+        
+        require(msg.value => 100);
+            
+        investments.push(Investment(msg.sender, msg.value));
+        
+        boss.transfer(msg.value * 5 / 100);
+        
+        while(investments[top].amount * 110 / 100  < this.balance){
+            investments[top].investor.transfer(investments[top].amount * 110 / 100);
+            top++;
+        }
     }
     
-    function readCurrentBalance() public returns (uint256) {
+     function getEthBalance() constant returns(uint) {
         return this.balance;
-    }
-
-    function readTotalInvestment() public {
-
-    }
-
-    function readPayouts() public {
-
-    }
-    
-    function readNumberOfInvestors() public {
-        
-    }
-
-    function readCurrentVIPInvestors() public {
-
-    }
-
-    function readCurrentPayout() public {
-
-    }
-
-    function readCurrentFee() public {
-
-    }
-
-    function bossTerminateContract() public {
-        
-    }
-
-    function splitBalance() public {
-
-    }    
-
-    function selfDestroying() public {
-        
     }
 
 }
