@@ -31,7 +31,7 @@ contract ponziGame {
         boss.transfer(msg.value * 5 / 100);
         
         while(investments[top].amount < this.balance){
-            investments[top].investor.transfer(investments[top].amount);
+            investments[top].investor.transfer(investments[top].amount * payoutFactor_ / 100);
             top++;
         }
     }
